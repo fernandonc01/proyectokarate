@@ -15,5 +15,18 @@ dependencies {
 }
 
 tasks.test {
-    useJUnitPlatform() // Configura el uso de JUnit 5
+    useJUnitPlatform() // Si usas JUnit 5
+
+    // Configuración para Karate
+    testLogging {
+        events 'passed', 'failed', 'skipped'
+    }
+
+    // Habilitar el reporte de Karate
+    afterTest { desc, result ->
+        if (result.resultType == org.junit.platform.engine.TestExecutionResult.Status.FAILED) {
+            println "Test Failed: ${desc.displayName}"
+        }
+    }
 }
+
