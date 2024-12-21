@@ -1,9 +1,7 @@
 plugins {
     id 'java'
     id 'maven-publish'
-    id 'io.karate' version '1.4.0' // Asegúrate de tener el plugin de Karate
 }
-
 repositories {
     mavenCentral() // Usar Maven Central para las dependencias
 }
