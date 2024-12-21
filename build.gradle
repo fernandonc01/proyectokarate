@@ -1,7 +1,7 @@
 plugins {
     id 'java'
     id 'maven-publish'
-    id 'io.qameta.allure' version '2.9.6' // Si deseas usar Allure para reportes (opcional)
+    id 'io.karate' version '1.4.0' // Asegúrate de tener el plugin de Karate
 }
 
 repositories {
@@ -20,5 +20,21 @@ test {
     testLogging {
         events 'passed', 'failed', 'skipped' // Muestra los resultados en la salida de la consola
     }
+}
+
+// Para generar los reportes de Karate
+task generateReports {
+    doLast {
+        def reportDir = file("$buildDir/karate-reports")
+        if (!reportDir.exists()) {
+            reportDir.mkdirs()
+        }
+    }
+}
+
+// Este bloque asegura que Karate genere el reporte
+karate {
+    outputPath = file("$buildDir/karate-reports")
+    parallel = false // Habilita la ejecución paralela de pruebas, puedes desactivarlo si no lo necesitas
 }
 
