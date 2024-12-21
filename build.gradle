@@ -1,28 +1,26 @@
 plugins {
-    id 'java' // Usa el plugin de Java
+    id 'java'
+    id 'maven-publish'
 }
 
 repositories {
-    mavenCentral() // Usa el repositorio Maven Central para descargar dependencias
+    mavenCentral() // Usar Maven Central para las dependencias
 }
 
 dependencies {
-    // Dependencia para Karate
+    // Dependencias de Karate
     testImplementation 'com.intuit.karate:karate-junit5:1.4.0'
-
-    // Opcional: Dependencia para JUnit (ya incluida en Karate, pero puedes agregarla si lo necesitas)
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.10.0'
 }
 
-tasks.test {
-    useJUnitPlatform() // Si usas JUnit 5
-
-    // Configuración para Karate
+test {
+    useJUnitPlatform() // Configura el uso de JUnit 5 (necesario para Karate)
     testLogging {
-        events 'passed', 'failed', 'skipped'
+        events 'passed', 'failed', 'skipped' // Muestra los resultados en la salida
     }
 
-    // Habilitar el reporte de Karate
+    // Configura Karate para ejecutar las pruebas
     afterTest { desc, result ->
         if (result.resultType == org.junit.platform.engine.TestExecutionResult.Status.FAILED) {
             println "Test Failed: ${desc.displayName}"
@@ -30,3 +28,6 @@ tasks.test {
     }
 }
 
+task wrapper(type: Wrapper) {
+    gradleVersion = '8.9' // Asegúrate de usar una versión de Gradle compatible
+}
