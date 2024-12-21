@@ -1,5 +1,5 @@
 plugins {
-    id 'java' // Usa el plugin de Java, si es un proyecto Java
+    id 'java' // Usa el plugin de Java
 }
 
 repositories {
@@ -7,7 +7,10 @@ repositories {
 }
 
 dependencies {
-    // Ejemplo: Dependencia para usar JUnit en pruebas
+    // Dependencia para Karate
+    testImplementation 'com.intuit.karate:karate-junit5:1.4.0'
+
+    // Opcional: Dependencia para JUnit (ya incluida en Karate, pero puedes agregarla si lo necesitas)
     testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
 }
 
