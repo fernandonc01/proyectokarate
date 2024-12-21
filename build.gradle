@@ -28,6 +28,3 @@ test {
     }
 }
 
-task wrapper(type: Wrapper) {
-    gradleVersion = '8.9' // Asegúrate de usar una versión de Gradle compatible
-}
