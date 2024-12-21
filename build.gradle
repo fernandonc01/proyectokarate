@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'maven-publish'
+    id 'io.qameta.allure' version '2.9.6' // Si deseas usar Allure para reportes (opcional)
 }
 
 repositories {
@@ -8,23 +9,16 @@ repositories {
 }
 
 dependencies {
-    // Dependencias de Karate
-    testImplementation 'com.intuit.karate:karate-junit5:1.4.0'
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.0'
-    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.10.0'
+    // Karate y JUnit 5 como dependencias
+    testImplementation 'com.intuit.karate:karate-junit5:1.4.0' // Versión de Karate
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.0' // JUnit 5
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.10.0' // Motor de pruebas JUnit 5
 }
 
 test {
-    useJUnitPlatform() // Configura el uso de JUnit 5 (necesario para Karate)
+    useJUnitPlatform() // Configura el uso de JUnit 5 para Karate
     testLogging {
-        events 'passed', 'failed', 'skipped' // Muestra los resultados en la salida
-    }
-
-    // Configura Karate para ejecutar las pruebas
-    afterTest { desc, result ->
-        if (result.resultType == org.junit.platform.engine.TestExecutionResult.Status.FAILED) {
-            println "Test Failed: ${desc.displayName}"
-        }
+        events 'passed', 'failed', 'skipped' // Muestra los resultados en la salida de la consola
     }
 }
 
