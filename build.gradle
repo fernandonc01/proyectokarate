@@ -1,0 +1,16 @@
+plugins {
+    id 'java' // Usa el plugin de Java, si es un proyecto Java
+}
+
+repositories {
+    mavenCentral() // Usa el repositorio Maven Central para descargar dependencias
+}
+
+dependencies {
+    // Ejemplo: Dependencia para usar JUnit en pruebas
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
+}
+
+tasks.test {
+    useJUnitPlatform() // Configura el uso de JUnit 5
+}
